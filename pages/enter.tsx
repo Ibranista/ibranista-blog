@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
 function EnterPage() {
   return (
     <>
-    <div>EnterPage</div>
+      <div>Login</div>
     </>
-  )
+  );
 }
 
-export default EnterPage
+export default EnterPage;
