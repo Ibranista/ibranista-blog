@@ -3,7 +3,8 @@ import Link from "next/link";
 import React from "react";
 
 function Navbar() {
-  const { user, username } = {};
+  const user: boolean = true;
+  const username: boolean = true;
   return (
     <>
       <nav className="navbar">
@@ -23,7 +24,6 @@ function Navbar() {
               </li>
               <li>
                 <Link href={`/${username}`}>
-                  <button>Profile</button>
                   <Image src={user?.photoURL} alt="user profile" />
                 </Link>
               </li>
