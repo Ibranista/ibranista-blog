@@ -24,7 +24,7 @@ function Navbar() {
               </li>
               <li>
                 <Link href={`/${username}`}>
-                  <Image src={user?.photoURL} alt="user profile" />
+                  <Image src={"/user?.photoURL"} width={45} height={45} alt="user profile" />
                 </Link>
               </li>
             </>
