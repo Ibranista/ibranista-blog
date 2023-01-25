@@ -16,11 +16,11 @@ const firebaseConfig = {
   appId: "1:282092037222:web:7f4650366f24bee8abf9a7",
   measurementId: "G-BLEGVJHX9D",
 };
-
+let app: any;
 if (!firebase.getApps.length) {
-  const app = initializeApp(firebaseConfig);
+  // so, it will not be initialized if already initialized.
+  app = initializeApp(firebaseConfig);
 }
-
-export const auth = getAuth();
-export const firestore = getFirestore();
-export const storage = getStorage();
+export const auth = getAuth(app);
+export const firestore = getFirestore(app);
+export const storage = getStorage(app);
