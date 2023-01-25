@@ -3,7 +3,9 @@ import React from "react";
 function EnterPage() {
   return (
     <>
-      <div>Login</div>
+      <main>
+        <h1>Login</h1>
+      </main>
     </>
   );
 }
