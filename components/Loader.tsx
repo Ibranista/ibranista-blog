@@ -1,11 +1,8 @@
 import React from "react";
 
 function Loader({ show }: { show: boolean }) {
-  return (
-    <div className="loader">
-      {show ? <div className="loader__container"> </div> : null}
-    </div>
-  );
+  console.log(show);
+  return <div>{show ? <div className="loader"> </div> : null}</div>;
 }
 
 export default Loader;
