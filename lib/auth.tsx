@@ -2,7 +2,8 @@ import { async } from "@firebase/util";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "./firebase";
 import { Toast, toast } from "react-hot-toast";
-export default function SignInButton() {
+
+export const SignInButton = () => {
   const signInWithGoogle = async () => {
     try {
       const provider = new GoogleAuthProvider();
@@ -17,4 +18,15 @@ export default function SignInButton() {
       Sign in with Google
     </button>
   );
-}
+};
+
+export const SignOut = () => {
+  const signOut = async () => {
+    try {
+      await auth.signOut();
+    } catch (error: any) {
+      toast.error(error);
+    }
+  };
+  return <button onClick={signOut}>Sign Out</button>;
+};

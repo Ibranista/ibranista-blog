@@ -1,5 +1,5 @@
 import React from "react";
-import SignInButton from "@/lib/auth";
+import { SignInButton, SignOut } from "@/lib/auth";
 function EnterPage() {
   return (
     <>
