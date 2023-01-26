@@ -22,6 +22,7 @@ export const UserContext = createContext<any>({ user: null, username: "" });
 export default function Authentication() {
   const [user] = useAuthState(auth);
   const [username, setUsername] = useState<SetStateAction<any>>(null);
+  const [isClicked, setIsClicked] = useState(false);
   console.log("the user: ", user?.displayName);
   useEffect(() => {
     setUsername(user?.displayName);
@@ -31,16 +32,22 @@ export default function Authentication() {
       if (navigator.onLine) {
         try {
           const provider = new GoogleAuthProvider();
+          setIsClicked(true);
           await signInWithPopup(auth, provider);
         } catch (error: any) {
           toast.error(error);
         }
       } else {
         toast.error("check your internet connection and try again!");
+        setIsClicked(false);
       }
     };
     return (
-      <button className="btn-google" onClick={signInWithGoogle}>
+      <button
+        className="btn-google"
+        onClick={signInWithGoogle}
+        disabled={isClicked}
+      >
         <Image src="/google.jpeg" width={40} height={35} alt="Google Logo" />
         Sign in with Google
       </button>
@@ -50,6 +57,7 @@ export default function Authentication() {
   const SignOut = () => {
     const signOut = async () => {
       try {
+        setIsClicked(false);
         await userSignOut(auth).then(() => {
           setUsername(null);
         });
