@@ -1,10 +1,10 @@
 import React from "react";
-
+import SignInButton from "@/lib/auth";
 function EnterPage() {
   return (
     <>
       <main>
-        <h1>Login</h1>
+        <SignInButton />
       </main>
     </>
   );
