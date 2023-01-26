@@ -6,7 +6,6 @@ import { getStorage } from "firebase/storage";
 import "firebase/auth";
 import "firebase/firestore";
 import "firebase/storage";
-
 const firebaseConfig = {
   apiKey: "AIzaSyACAB8L2OEo3U6qEIKaD1ioC9k-fPZzD2g",
   authDomain: "ibranista-blog.firebaseapp.com",
