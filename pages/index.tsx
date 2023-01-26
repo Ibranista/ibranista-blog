@@ -21,7 +21,7 @@ export default function Home() {
         <Link
           href={{
             pathname: "/enter",
-            query: { name: "Ibran" },
+            // query: { name: "Ibran" },
           }}
         >
           Enter
