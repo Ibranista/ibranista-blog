@@ -17,7 +17,7 @@ const firebaseConfig = {
   measurementId: "G-BLEGVJHX9D",
 };
 let app: any;
-if (!firebase.getApps.length) {
+if (!firebase) {
   // so, it will not be initialized if already initialized.
   app = initializeApp(firebaseConfig);
 }
