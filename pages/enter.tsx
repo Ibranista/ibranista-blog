@@ -1,10 +1,13 @@
 import React from "react";
-import { SignInButton, SignOut } from "@/lib/auth";
+import { UseAuth } from "@/lib/auth";
 function EnterPage() {
+  const { SignInButton, user, username, SignOut } = UseAuth();
+  console.log("user:", user);
   return (
     <>
       <main>
-        <SignInButton />
+        {/* {user ? !username ? <UserNameForm /> : <SignOut /> : <SignInButton />} */}
+        {username ? <SignOut /> : <SignInButton />}
       </main>
     </>
   );

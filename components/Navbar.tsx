@@ -1,10 +1,11 @@
+import { UseAuth } from "@/lib/auth";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 function Navbar() {
-  const user: boolean = false;
-  const username: boolean = false;
+  const { user, username } = UseAuth();
+  let photoURL = "/useravatar.jpeg";
   return (
     <>
       <nav className="navbar">
@@ -25,7 +26,7 @@ function Navbar() {
               <li>
                 <Link href={`/${username}`}>
                   <Image
-                    src={"/user?.photoURL"}
+                    src={username && photoURL}
                     width={45}
                     height={45}
                     alt="user profile"
