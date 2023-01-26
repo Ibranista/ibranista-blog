@@ -1,27 +1,37 @@
 import { async } from "@firebase/util";
 import {
   GoogleAuthProvider,
+  onAuthStateChanged,
   signInWithPopup,
   signOut as userSignOut,
 } from "firebase/auth";
-import { auth } from "./firebase";
+import { auth, firestore } from "./firebase";
+import { collection, getDocs } from "firebase/firestore";
 import { Toast, toast } from "react-hot-toast";
-import { createContext, useContext, useState } from "react";
+import {
+  createContext,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import Image from "next/image";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 export const UserContext = createContext<any>({ user: null, username: "" });
 export default function Authentication() {
-  const [user, setUser] = useState<object | null>({});
-  const [username, setUsername] = useState<string | null>("");
+  const [user] = useAuthState(auth);
+  const [username, setUsername] = useState<SetStateAction<any>>(null);
+  console.log("the user: ", user?.displayName);
+  useEffect(() => {
+    setUsername(user?.displayName);
+  }, [user, username]);
   const SignInButton = () => {
     const signInWithGoogle = async () => {
       if (navigator.onLine) {
         try {
           const provider = new GoogleAuthProvider();
-          const user = await signInWithPopup(auth, provider);
-          console.log("returned:", user.user);
-          let userName = user.user?.displayName;
-          setUsername(userName);
+          await signInWithPopup(auth, provider);
         } catch (error: any) {
           toast.error(error);
         }
@@ -41,7 +51,6 @@ export default function Authentication() {
     const signOut = async () => {
       try {
         await userSignOut(auth).then(() => {
-          setUser(null);
           setUsername(null);
         });
       } catch (error: any) {
