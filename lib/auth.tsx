@@ -7,27 +7,31 @@ import {
 import { auth } from "./firebase";
 import { Toast, toast } from "react-hot-toast";
 import { createContext, useContext, useState } from "react";
+import Image from "next/image";
 
-export const UserContext = createContext<any>({ user: null, username: null });
+export const UserContext = createContext<any>({ user: null, username: "" });
 export default function Authentication() {
   const [user, setUser] = useState<object | null>({});
   const [username, setUsername] = useState<string | null>("");
   const SignInButton = () => {
     const signInWithGoogle = async () => {
-      try {
-        const provider = new GoogleAuthProvider();
-        const user = await signInWithPopup(auth, provider);
-        console.log("returned:", user.user);
-        let userName = user.user?.displayName;
-        setUsername(userName);
-        !userName && toast.error("No username found");
-      } catch (error: any) {
-        toast.error(error);
+      if (navigator.onLine) {
+        try {
+          const provider = new GoogleAuthProvider();
+          const user = await signInWithPopup(auth, provider);
+          console.log("returned:", user.user);
+          let userName = user.user?.displayName;
+          setUsername(userName);
+        } catch (error: any) {
+          toast.error(error);
+        }
+      } else {
+        toast.error("check your internet connection and try again!");
       }
     };
     return (
       <button className="btn-google" onClick={signInWithGoogle}>
-        <img src="/google.jpeg" alt="Google Logo" />
+        <Image src="/google.jpeg" width={40} height={35} alt="Google Logo" />
         Sign in with Google
       </button>
     );
