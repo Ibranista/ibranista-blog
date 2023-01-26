@@ -2,7 +2,8 @@ import React from "react";
 import { UseAuth } from "@/lib/auth";
 function EnterPage() {
   const { SignInButton, user, username, SignOut } = UseAuth();
-  console.log("user:", user);
+  console.log("user inside enter:", user);
+  console.log("user naem inside enter:", username)
   return (
     <>
       <main>
