@@ -20,10 +20,11 @@ import {
 } from "react";
 import Image from "next/image";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { MethodDeclaration } from "typescript";
 
 export const UserContext = createContext<any>({ user: null, username: "" });
 export default function Authentication() {
-  const [user] = useAuthState(auth);
+  let [user] = useAuthState(auth);
   const [username, setUsername] = useState<SetStateAction<any>>(null);
   const [isClicked, setIsClicked] = useState(false);
   console.log("the user: ", user?.displayName);
@@ -121,13 +122,20 @@ export default function Authentication() {
   };
 
   function CreateUser() {
-    const [formData, setFormData] = useState({ email: "", password: "" });
+    const [formData, setFormData] = useState({
+      displayName: "",
+      email: "",
+      password: "",
+    });
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
     };
     // createUserWithEmailAndPassword
-    const createAccount = async () => {
-      await createUserWithEmailAndPassword(
+    const createAccount = async (e: any) => {
+      e.preventDefault();
+      console.log(formData.email, formData.password);
+      toast.success("user successfully created!");
+      let users = await createUserWithEmailAndPassword(
         auth,
         formData.email,
         formData.password
@@ -136,12 +144,24 @@ export default function Authentication() {
     return (
       <>
         <form action="">
+          <label htmlFor="displayName">
+            Display Name (this will be your username):
+          </label>
+          <input
+            type="text"
+            id="displayName"
+            name="displayName"
+            value={formData.displayName}
+            onChange={handleChange}
+            required
+          />
           <label htmlFor="email">Email:</label>
           <input
             type="email"
             id="email"
             name="email"
             onChange={handleChange}
+            value={formData.email}
             required
           />
           <br />
@@ -155,7 +175,7 @@ export default function Authentication() {
             required
           />
           <br />
-          <button type="submit" onSubmit={createAccount}>
+          <button type="submit" onClick={createAccount}>
             Create Account
           </button>
         </form>
