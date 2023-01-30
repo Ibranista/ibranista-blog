@@ -17,7 +17,7 @@ import {
 } from "react";
 import Image from "next/image";
 import { useAuthState } from "react-firebase-hooks/auth";
-
+import { WriteDailySpecial } from "./firestore";
 export const UserContext = createContext<any>({ user: null, username: "" });
 export default function Authentication() {
   const [user] = useAuthState(auth);
@@ -73,6 +73,7 @@ export default function Authentication() {
     SignOut,
     user,
     username,
+    WriteDailySpecial,
   };
 }
 
