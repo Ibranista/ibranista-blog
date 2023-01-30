@@ -1,7 +1,10 @@
 import { async } from "@firebase/util";
 import {
+  createUserWithEmailAndPassword,
+  EmailAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signOut as userSignOut,
 } from "firebase/auth";
@@ -24,6 +27,7 @@ export default function Authentication() {
   const [username, setUsername] = useState<SetStateAction<any>>(null);
   const [isClicked, setIsClicked] = useState(false);
   console.log("the user: ", user?.displayName);
+
   useEffect(() => {
     setUsername(user?.displayName);
   }, [user, username]);
@@ -68,11 +72,104 @@ export default function Authentication() {
     return <button onClick={signOut}>Sign Out</button>;
   };
 
+  const SignInWithEmail = () => {
+    const [formData, setFormData] = useState({ email: "", password: "" });
+
+    const signInWithEmail = async () => {
+      try {
+        await signInWithEmailAndPassword(
+          auth,
+          formData.email,
+          formData.password
+        );
+      } catch (error: any) {
+        toast.error(error);
+      }
+    };
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+    return (
+      <>
+        <h1>Sign In With Email & Password</h1>
+        <form action="">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            onChange={handleChange}
+            required
+          />
+          <br />
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            onChange={handleChange}
+            value={formData.password}
+            required
+          />
+          <br />
+          <button type="submit" onSubmit={signInWithEmail}>
+            Sign In
+          </button>
+        </form>
+      </>
+    );
+  };
+
+  function CreateUser() {
+    const [formData, setFormData] = useState({ email: "", password: "" });
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+    // createUserWithEmailAndPassword
+    const createAccount = async () => {
+      await createUserWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password
+      );
+    };
+    return (
+      <>
+        <form action="">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            onChange={handleChange}
+            required
+          />
+          <br />
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            onChange={handleChange}
+            value={formData.password}
+            required
+          />
+          <br />
+          <button type="submit" onSubmit={createAccount}>
+            Create Account
+          </button>
+        </form>
+      </>
+    );
+  }
+
   return {
     SignInButton,
     SignOut,
     user,
     username,
+    SignInWithEmail,
+    CreateUser,
   };
 }
 
