@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut as userSignOut,
+  updateProfile,
 } from "firebase/auth";
 import { auth, firestore } from "./firebase";
 import { collection, getDocs } from "firebase/firestore";
@@ -76,13 +77,15 @@ export default function Authentication() {
   const SignInWithEmail = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });
 
-    const signInWithEmail = async () => {
+    const signInWithEmail = async (e: React.ChangeEvent<HTMLInputElement>) => {
+      e.preventDefault();
       try {
         await signInWithEmailAndPassword(
           auth,
           formData.email,
           formData.password
         );
+        toast.success("signedin");
       } catch (error: any) {
         toast.error(error);
       }
@@ -113,7 +116,7 @@ export default function Authentication() {
             required
           />
           <br />
-          <button type="submit" onSubmit={signInWithEmail}>
+          <button type="submit" onClick={signInWithEmail}>
             Sign In
           </button>
         </form>
@@ -133,13 +136,21 @@ export default function Authentication() {
     // createUserWithEmailAndPassword
     const createAccount = async (e: any) => {
       e.preventDefault();
-      console.log(formData.email, formData.password);
-      toast.success("user successfully created!");
-      let users = await createUserWithEmailAndPassword(
-        auth,
-        formData.email,
-        formData.password
-      );
+      try {
+        let users = await createUserWithEmailAndPassword(
+          auth,
+          formData.email,
+          formData.password
+        );
+        updateProfile(users.user, {
+          displayName: formData.displayName,
+        });
+        toast.success("user successfully created!");
+
+        console.log("the created one: ", users);
+      } catch (e) {
+        toast.error(e.message);
+      }
     };
     return (
       <>

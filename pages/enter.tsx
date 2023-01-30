@@ -5,7 +5,6 @@ function EnterPage() {
     UseAuth();
   console.log("user inside enter:", user);
   console.log("user naem inside enter:", username);
-
   return (
     <>
       <main>
