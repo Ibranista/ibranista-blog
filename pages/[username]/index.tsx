@@ -1,9 +1,22 @@
+import UserProfile from "@/components/UserProfile";
 import React from "react";
 
-function UserProfilePage() {
+export async function getServerSideProps({ query }) {
+  const { username } = query;
+
+   
+
+  return {
+    props: { user, posts },
+  };
+}
+
+function UserProfilePage({ user, posts }) {
   return (
     <>
-      <div className="">UserProfilePage</div>
+      <main>
+        <UserProfile />
+      </main>
     </>
   );
 }
