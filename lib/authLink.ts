@@ -9,13 +9,13 @@ interface actionCode {
     installApp: boolean;
     minimumVersion: string;
   };
-  dynamicLinkDomain: string;
+  // dynamicLinkDomain: string;
 }
 
 export const actionCodeSettings: actionCode = {
   // URL you want to redirect back to. The domain (www.example.com) for this
   // URL must be in the authorized domains list in the Firebase Console.
-  url: "https://www.example.com/finishSignUp?cartId=1234",
+  url: "http://localhost:3000/enter",
   // This must be true.
   handleCodeInApp: true,
   iOS: {
@@ -26,5 +26,5 @@ export const actionCodeSettings: actionCode = {
     installApp: true,
     minimumVersion: "12",
   },
-  dynamicLinkDomain: "example.page.link",
+  // dynamicLinkDomain: "example.page.link",
 };
