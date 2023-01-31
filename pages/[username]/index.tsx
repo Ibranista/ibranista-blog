@@ -4,14 +4,13 @@ import React from "react";
 export async function getServerSideProps({ query }) {
   const { username } = query;
 
-   
 
   return {
     props: { user, posts },
   };
 }
 
-function UserProfilePage({ user, posts }) {
+function UserProfilePage() {
   return (
     <>
       <main>

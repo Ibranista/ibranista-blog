@@ -1,12 +1,13 @@
 import {
   createUserWithEmailAndPassword,
   sendSignInLinkToEmail,
-  updateProfile
+  updateProfile,
 } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { actionCodeSettings } from "./authLink";
-import { auth } from "./firebase";
+import { auth, firestore } from "./firebase";
 
 function CreateUser() {
   const [formData, setFormData] = useState({
@@ -18,12 +19,10 @@ function CreateUser() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   // createUserWithEmailAndPassword
+  const userName = doc(firestore, "users");
   const createAccount = async (e: any) => {
     e.preventDefault();
     try {
-      await sendSignInLinkToEmail(auth, formData.email, actionCodeSettings);
-      toast.success("Email sent! Please check your email to complete sign up.");
-      window.localStorage.setItem("emailForSignIn", formData.email);
       let users = await createUserWithEmailAndPassword(
         auth,
         formData.email,
@@ -32,8 +31,8 @@ function CreateUser() {
       await updateProfile(users.user, {
         displayName: formData.displayName,
       });
+      setDoc(userName, { name: formData.displayName });
       toast.success("user successfully created!");
-      console.log("the created one: ", users);
     } catch (e: any) {
       toast.error(e.message);
     }
