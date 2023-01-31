@@ -1,16 +1,11 @@
 import { async } from "@firebase/util";
 import {
-  createUserWithEmailAndPassword,
-  EmailAuthProvider,
   GoogleAuthProvider,
-  onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut as userSignOut,
-  updateProfile,
 } from "firebase/auth";
-import { auth, firestore } from "./firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { auth } from "./firebase";
 import { Toast, toast } from "react-hot-toast";
 import {
   createContext,

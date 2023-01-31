@@ -9,7 +9,7 @@ interface actionCode {
     installApp: boolean;
     minimumVersion: string;
   };
-  // dynamicLinkDomain: string;
+  dynamicLinkDomain: string;
 }
 
 export const actionCodeSettings: actionCode = {
@@ -26,5 +26,5 @@ export const actionCodeSettings: actionCode = {
     installApp: true,
     minimumVersion: "12",
   },
-  // dynamicLinkDomain: "example.page.link",
+  dynamicLinkDomain: "gmail.com",
 };

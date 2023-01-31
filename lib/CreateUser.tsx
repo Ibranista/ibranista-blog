@@ -1,7 +1,11 @@
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { useEffect, useState } from "react";
+import {
+  createUserWithEmailAndPassword,
+  sendSignInLinkToEmail,
+  updateProfile
+} from "firebase/auth";
+import { useState } from "react";
 import { toast } from "react-hot-toast";
-import { UseAuth } from "./auth";
+import { actionCodeSettings } from "./authLink";
 import { auth } from "./firebase";
 
 function CreateUser() {
@@ -17,6 +21,9 @@ function CreateUser() {
   const createAccount = async (e: any) => {
     e.preventDefault();
     try {
+      await sendSignInLinkToEmail(auth, formData.email, actionCodeSettings);
+      toast.success("Email sent! Please check your email to complete sign up.");
+      window.localStorage.setItem("emailForSignIn", formData.email);
       let users = await createUserWithEmailAndPassword(
         auth,
         formData.email,
