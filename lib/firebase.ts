@@ -1,7 +1,7 @@
 import firebase, { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 // import "firebase/firestore";
-import { getFirestore } from "firebase/firestore";
+import { DocumentSnapshot, getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import "firebase/auth";
 import "firebase/firestore";
@@ -23,3 +23,20 @@ if (!firebase) {
 export const auth = getAuth(app);
 export const firestore = getFirestore(app);
 export const storage = getStorage(app);
+
+/**
+ * Convert a Firestore document to JSON
+ * because the post doc has a time stamp on it
+ * in order to pass them through the ss as json we need to convert it into number
+ * @param {DocumentSnapshot} doc
+ */
+
+export function PostToJSON(doc: DocumentSnapshot) {
+  const data = doc.data();
+  return {
+    ...data,
+    // Gotcha! firestore timestamp NOT serializable to JSON. Must convert to milliseconds
+    createdAt: data?.createdAt.toMillis() || 0,
+    updatedAt: data?.updatedAt.toMillis() || 0,
+  };
+}
