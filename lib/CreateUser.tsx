@@ -19,7 +19,7 @@ function CreateUser() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   // createUserWithEmailAndPassword
-  const userName = doc(firestore, "users");
+  const userName = doc(firestore, "users/name");
   const createAccount = async (e: any) => {
     e.preventDefault();
     try {
