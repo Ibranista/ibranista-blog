@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { UseAuth } from "@/lib/auth";
 import { forgotPassword } from "@/lib/ForgotPassword";
 import { doc, getDoc } from "firebase/firestore";
@@ -38,34 +38,34 @@ function EnterPage() {
         setIsValid(false);
       }
     };
-    return (
-      !username && (
-        <section>
-          <h3>Choose Username</h3>
-          <form onSubmit={onSubmit}>
-            <input
-              name="username"
-              placeholder="username"
-              value={formValue}
-              onChange={onChange}
-            />
-            <button type="submit" className="btn-green" disabled={!isValid}>
-              Choose
-            </button>
+    // return (
+    //   !username && (
+    //     <section>
+    //       <h3>Choose Username</h3>
+    //       <form onSubmit={onSubmit}>
+    //         <input
+    //           name="username"
+    //           placeholder="username"
+    //           value={formValue}
+    //           onChange={onChange}
+    //         />
+    //         <button type="submit" className="btn-green" disabled={!isValid}>
+    //           Choose
+    //         </button>
 
-            <h3>Debug State</h3>
-            <div>
-              username:{formValue} <br />
-              Loading: {loading.toString()}
-              <br />
-              Username Valid: {isValid.toString()}
-            </div>
-          </form>
-        </section>
-      )
-    );
+    //         <h3>Debug State</h3>
+    //         <div>
+    //           username:{formValue} <br />
+    //           Loading: {loading.toString()}
+    //           <br />
+    //           Username Valid: {isValid.toString()}
+    //         </div>
+    //       </form>
+    //     </section>
+    //   )
+    // );
   }
-  const checkUsername = async(username:string) => {
+  const checkUsername = useCallback (debounce(async(username:string) => {
     if (username.length >= 3) {
       const ref = doc(firestore,`usernames/${username}`);
       const { exists } = await getDoc(ref);
@@ -90,6 +90,6 @@ function EnterPage() {
       </main>
     </>
   );
-}
+},500),[])
 
 export default EnterPage;
