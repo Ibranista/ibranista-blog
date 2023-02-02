@@ -1,4 +1,5 @@
 import { async } from "@firebase/util";
+import SignINOut from "@/auth/SignInOut";
 import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
@@ -22,53 +23,12 @@ export const UserContext = createContext<any>({ user: null, username: "" });
 export default function Authentication() {
   let [user] = useAuthState(auth);
   const [username, setUsername] = useState<SetStateAction<any>>(null);
-  const [isClicked, setIsClicked] = useState(false);
-
+  const { SignInButton, SignOut } = SignINOut();
   useEffect(() => {
     setTimeout(() => {
       setUsername(user?.displayName);
     }, 1000);
   }, [user, username]);
-  const SignInButton = () => {
-    const signInWithGoogle = async () => {
-      if (navigator.onLine) {
-        try {
-          const provider = new GoogleAuthProvider();
-          setIsClicked(true);
-          await signInWithPopup(auth, provider);
-        } catch (error: any) {
-          toast.error(error);
-        }
-      } else {
-        toast.error("check your internet connection and try again!");
-        setIsClicked(false);
-      }
-    };
-    return (
-      <button
-        className="btn-google"
-        onClick={signInWithGoogle}
-        disabled={isClicked}
-      >
-        <Image src="/google.jpeg" width={40} height={35} alt="Google Logo" />
-        Sign in with Google
-      </button>
-    );
-  };
-
-  const SignOut = () => {
-    const signOut = async () => {
-      try {
-        setIsClicked(false);
-        await userSignOut(auth).then(() => {
-          setUsername(null);
-        });
-      } catch (error: any) {
-        toast.error(error);
-      }
-    };
-    return <button onClick={signOut}>Sign Out</button>;
-  };
 
   const SignInWithEmail = () => {
     const [formData, setFormData] = useState({ email: "", password: "" });
@@ -83,7 +43,7 @@ export default function Authentication() {
         );
         toast.success("signedin");
       } catch (error: any) {
-        toast.error(error);
+        toast.error(error.message);
       }
     };
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
