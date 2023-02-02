@@ -13,18 +13,18 @@ import {
 import React from "react";
 
 export async function getServerSideProps({ query }: any) {
-  console.log("server side");
+  const { username } = query;
   return {
     props: { user: "ibrahim", posts: { name: "Ibrahim" } },
   };
 }
 
-function UserProfilePage({ user, posts }) {
+function UserProfilePage({ user, query }: { user: string }) {
   return (
     <>
       <main>
-        <UserProfile user={user} />
-        <PostFeed posts={posts} />
+        <h1>Hello</h1>
+        {user}
       </main>
     </>
   );
