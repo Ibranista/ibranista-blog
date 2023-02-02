@@ -19,7 +19,6 @@ function CreateUser() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   // createUserWithEmailAndPassword
-  const userName = doc(firestore, "users/name");
   const createAccount = async (e: any) => {
     e.preventDefault();
     try {
@@ -31,7 +30,6 @@ function CreateUser() {
       await updateProfile(users.user, {
         displayName: formData.displayName,
       });
-      setDoc(userName, { name: formData.displayName });
       toast.success("user successfully created!");
     } catch (e: any) {
       toast.error(e.message);
