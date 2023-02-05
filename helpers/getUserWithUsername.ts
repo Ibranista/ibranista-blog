@@ -11,7 +11,6 @@ export async function getUserWithUsername(username: object) {
   const usersRef = collection(firestore, "users");
   const q = Query(usersRef, where("username", "==", username), limit(1));
   const userDoc = (await getDocs(q)).docs[0];
-  // console.log("hello: ", userDoc.data());
   return userDoc;
 }
 
