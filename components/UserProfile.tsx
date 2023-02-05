@@ -1,4 +1,4 @@
-function UserProfile({ user }) {
+function UserProfile({ user }: { user: any }) {
   const { photoURL, username, displayName } = user;
   return (
     <>
