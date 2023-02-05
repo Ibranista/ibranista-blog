@@ -17,19 +17,19 @@ export default function Authentication() {
   let [user] = useAuthState(auth);
   const [username, setUsername] = useState<SetStateAction<any>>(null);
   const { SignInButton, SignOut } = SignINOut();
-  if (user) {
-    let users = doc(firestore, `users/${user.uid}`);
-    setDoc(users, {
-      username: user.displayName,
-      photoURL: user.photoURL,
-      displayname: user.displayName,
-    });
-  }
-  useEffect(() => {
-    setTimeout(() => {
-      setUsername(user?.displayName);
-    }, 1000);
-  }, [user, username]);
+  // if (user) {
+  //   let users = doc(firestore, `users/${user.uid}`);
+  //   setDoc(users, {
+  //     username: user.displayName,
+  //     photoURL: user.photoURL,
+  //     displayname: user.displayName,
+  //   });
+  // }
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setUsername(user?.displayName);
+  //   }, 1000);
+  // }, [user, username]);
 
   return {
     SignInButton,

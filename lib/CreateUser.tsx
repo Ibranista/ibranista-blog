@@ -27,14 +27,15 @@ function CreateUser() {
         formData.email,
         formData.password
       );
-      await updateProfile(users.user, {
-        displayName: formData.displayName,
-      });
+      // await updateProfile(users.user, {
+      //   displayName: formData.displayName,
+      // });
       toast.success("user successfully created!");
     } catch (e: any) {
       toast.error(e.message);
     }
   };
+
   return (
     <>
       <form action="">
