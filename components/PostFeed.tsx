@@ -1,14 +1,17 @@
 import Link from "next/link";
 import React from "react";
 
-function PostFeed(admin: boolean) {
-  //   return posts ? posts.map(post=><PostItem post={post} key={post.slug} admin={admin}/>)
-  function PostItem({ admin = false }) {
+export default function PostFeed({ posts, admin }: { posts: Array<object>; admin: boolean }) {
+return posts ? (posts.map(post=><PostItem post={posts}
+key={post.slug} admin={admin}
+/>)
+}
+
+  function PostItem({ post,admin = false }) {
     const wordCount = post?.content.trim().split(/\s+/g).length;
     const minutesToRead = (wordCount / 100 + 1).toFixed(0);
-  }
-  return (
-    <div className="card">
+    return (
+      <div className="card">
       <Link href={`/${post.username}`}>
         <strong>By @{post.username}</strong>
       </Link>
@@ -23,6 +26,5 @@ function PostFeed(admin: boolean) {
       </footer>
     </div>
   );
-}
 
-export default PostFeed;
+    }

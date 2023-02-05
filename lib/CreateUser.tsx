@@ -1,13 +1,10 @@
 import {
   createUserWithEmailAndPassword,
-  sendSignInLinkToEmail,
   updateProfile,
 } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
-import { actionCodeSettings } from "./authLink";
-import { auth, firestore } from "./firebase";
+import { auth} from "./firebase";
 
 function CreateUser() {
   const [formData, setFormData] = useState({
@@ -35,6 +32,7 @@ function CreateUser() {
       toast.error(e.message);
     }
   };
+
   return (
     <>
       <form action="">

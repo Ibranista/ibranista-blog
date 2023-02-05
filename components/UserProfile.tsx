@@ -1,16 +1,16 @@
 import { UseAuth } from "@/lib/auth";
 import React from "react";
 
-function UserProfile() {
-  const { username, user } = UseAuth();
+function UserProfile({ user }) {
+  const { photoURL, username, displayName } = user;
   return (
     <>
       <div className="box-center">
-        <img src={user.photoURL || "/hacker.png"} className="card-img-center" />
+        <img src={photoURL || "/hacker.png"} className="card-img-center" />
         <p>
           <i>@{username}</i>
         </p>
-        <h1>{username || "Anonymous User"}</h1>
+        <h1>{displayName || "Anonymous User"}</h1>
       </div>
     </>
   );

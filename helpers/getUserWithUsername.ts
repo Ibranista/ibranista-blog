@@ -1,23 +1,25 @@
 import { firestore } from "@/lib/firebase";
 import {
   collection,
-  DocumentData,
   getDocs,
   limit,
-  Query,
-  query,
+  query as Query,
   where,
 } from "firebase/firestore";
 
-async function getUserWithUsername(username: string) {
+export async function getUserWithUsername(username: object) {
   const usersRef = collection(firestore, "users");
-  const querys: Query<DocumentData> = query(
-    usersRef,
-    where("username", "==", username),
-    limit(1)
-  );
-  const userDoc = await getDocs(querys);
+  const q = Query(usersRef, where("username", "==", username), limit(1));
+  const userDoc = (await getDocs(q)).docs[0];
+  // console.log("hello: ", userDoc.data());
   return userDoc;
 }
 
-export default getUserWithUsername;
+export function postToJSON(doc: any) {
+  const data = doc.data();
+  return {
+    ...data,
+    createdAt: data.createdAt.toMillis(),
+    updatedAt: data.updatedAt.toMillis(),
+  };
+}

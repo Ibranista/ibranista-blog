@@ -17,8 +17,15 @@ export default function SignINOut() {
           const provider = new GoogleAuthProvider();
           setIsClicked(true);
           await signInWithPopup(auth, provider);
+          // console.log "operation canceled" when pop up is closed
+          if (auth.currentUser) {
+            toast.success("successfully signed in!");
+          }
         } catch (error: any) {
-          toast.error(error);
+          setIsClicked(false);
+          if (error.code === "auth/popup-closed-by-user") {
+            toast.success("Operation cancelled");
+          }
         }
       } else {
         toast.error("check your internet connection and try again!");

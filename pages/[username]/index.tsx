@@ -1,45 +1,44 @@
+import PostFeed from "@/components/PostFeed";
 import UserProfile from "@/components/UserProfile";
-import getUserWithUsername from "@/helpers/getUserWithUsername";
+import { getUserWithUsername, postToJSON } from "@/helpers/getUserWithUsername";
 import { firestore } from "@/lib/firebase";
 import {
   collection,
   getDocs,
   limit,
   orderBy,
-  query,
+  query as Query,
   where,
 } from "firebase/firestore";
 import React from "react";
-
-export async function getServerSideProps({ query }: any) {
+export async function getServerSideProps({ query }: { query: any }) {
   const { username } = query;
-
   const userDoc = await getUserWithUsername(username);
-
-  // JSON Sserializable data means that the data does not contain functions or Date objects
   let user = null;
-  let posts: object = {};
+  let posts = null;
 
   if (userDoc) {
-    user = userDoc.docs;
-    const postsQuery = query(
+    user = userDoc.data();
+    const postsQuery = Query(
       collection(firestore, "posts"),
-      where("username", "==", "ibranista"),
+      where("author.uid", "==", userDoc.id),
       orderBy("createdAt", "desc"),
       limit(5)
     );
-    posts = (await getDocs(postsQuery)).docs.map  ;
+    posts = (await getDocs(postsQuery)).docs.map(postToJSON);
   }
+
   return {
-    props: { user, posts },
+    props: { user: "ibrahim", posts: { name: "Ibrahim" } },
   };
 }
 
-function UserProfilePage() {
+function UserProfilePage({ user }: { user: string }) {
   return (
     <>
       <main>
-        <UserProfile />
+        <h1>Hello</h1>
+        {user}
       </main>
     </>
   );
