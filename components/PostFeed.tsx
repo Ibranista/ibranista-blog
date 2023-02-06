@@ -8,11 +8,11 @@ export default function PostFeed({
   posts: Array<object>;
   admin: boolean;
 }) {
-  return posts
-    ? posts.map((post) => (
-        <PostItem post={post} key={post.slug} admin={admin} />
-      ))
-    : null;
+  return posts ? (
+    posts.map((post) => <PostItem post={post} key={post.slug} admin={admin} />)
+  ) : (
+    <h1>no posts yet!</h1>
+  );
 }
 
 function PostItem({ post, admin = false }) {

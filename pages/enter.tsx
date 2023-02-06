@@ -1,5 +1,4 @@
 import { UseAuth } from "@/lib/auth";
-import { forgotPassword } from "@/lib/ForgotPassword";
 import UsernameForm from "@/components/UserNameForm";
 
 function EnterPage() {
@@ -24,8 +23,6 @@ function EnterPage() {
             <CreateUser />
           </>
         )}
-
-        <button onClick={forgotPassword}>Forgot password</button>
       </main>
     </>
   );
