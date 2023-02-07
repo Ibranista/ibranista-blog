@@ -5,12 +5,15 @@ import styles from "@/styles/Home.module.css";
 import Link from "next/link";
 import Loader from "@/components/Loader";
 import {
+  collection,
   collectionGroup,
   DocumentData,
   FirestoreDataConverter,
   getDocs,
   limit,
   query,
+  startAfter,
+  Timestamp,
   where,
 } from "firebase/firestore";
 import { firestore } from "@/lib/firebase";
@@ -20,25 +23,14 @@ import { useState } from "react";
 import PostFeed from "@/components/PostFeed";
 
 const LIMIT = 1;
-export async function getServerSideProps(context) {
-  const ref: FirestoreDataConverter<DocumentData> | null = collectionGroup(
-    firestore,
-    "posts"
-  );
-  const postQuery = query<{
-    collections: string[];
-    limit: number;
-    where?: boolean;
-    orderBy?: string;
-  }>(
-    ref,
-    where("published", "==", true),
-    orderBy("createdAt", "desc"),
-    limit(LIMIT)
-  );
-  const posts = (await getDocs(postQuery)).docs.map(postToJSON);
+export async function getServerSideProps() {
+  const ref = collectionGroup(firestore, "posts");
+  const postsQuery = query(ref, where("published", "==", true), limit(LIMIT));
+
+  const posts = (await getDocs(postsQuery)).docs.map(postToJSON);
+
   return {
-    props: { posts },
+    props: { posts }, // will be passed to the page component as props
   };
 }
 
@@ -46,6 +38,32 @@ export default function Home(props: any) {
   const [posts, setPosts] = useState(props.posts);
   const [loading, setLoading] = useState(false);
   const [postsEnd, setPostsEnd] = useState(false);
+
+  const getMorePosts = async () => {
+    setLoading(true);
+    const last = posts[posts.length - 1];
+    const cursor =
+      typeof last.createdAt === "number"
+        ? Timestamp.fromMillis(last.createdAt)
+        : last.createdAt;
+
+    const ref = collectionGroup(firestore, "posts");
+    const postsQuery = query(
+      ref,
+      where("published", "==", true),
+      startAfter(cursor),
+      limit(LIMIT)
+    );
+
+    const newPosts = (await getDocs(postsQuery)).docs.map((doc) => doc.data());
+    setPosts(posts.concat(newPosts));
+    setLoading(false);
+
+    if (newPosts.length < LIMIT) {
+      setPostsEnd(true);
+    }
+  };
+
   return (
     <>
       <Head>
@@ -70,7 +88,7 @@ export default function Home(props: any) {
         <div>
           <PostFeed posts={posts} admin={false} />
           {!loading && !postsEnd && (
-            <button onClick={getMorePost}>Load More</button>
+            <button onClick={getMorePosts}>Load More</button>
           )}
           <Loader show={loading} />
           {postsEnd && "You have reached the end!"}
