@@ -4,8 +4,48 @@ import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
 import Link from "next/link";
 import Loader from "@/components/Loader";
+import {
+  collectionGroup,
+  DocumentData,
+  FirestoreDataConverter,
+  getDocs,
+  limit,
+  query,
+  where,
+} from "firebase/firestore";
+import { firestore } from "@/lib/firebase";
+import { orderBy } from "lodash";
+import { postToJSON } from "@/helpers/getUserWithUsername";
+import { useState } from "react";
+import PostFeed from "@/components/PostFeed";
 
-export default function Home() {
+const LIMIT = 1;
+export async function getServerSideProps(context) {
+  const ref: FirestoreDataConverter<DocumentData> | null = collectionGroup(
+    firestore,
+    "posts"
+  );
+  const postQuery = query<{
+    collections: string[];
+    limit: number;
+    where?: boolean;
+    orderBy?: string;
+  }>(
+    ref,
+    where("published", "==", true),
+    orderBy("createdAt", "desc"),
+    limit(LIMIT)
+  );
+  const posts = (await getDocs(postQuery)).docs.map(postToJSON);
+  return {
+    props: { posts },
+  };
+}
+
+export default function Home(props: any) {
+  const [posts, setPosts] = useState(props.posts);
+  const [loading, setLoading] = useState(false);
+  const [postsEnd, setPostsEnd] = useState(false);
   return (
     <>
       <Head>
@@ -26,6 +66,14 @@ export default function Home() {
         </Link>
         <div>
           <Loader show />
+        </div>
+        <div>
+          <PostFeed posts={posts} admin={false} />
+          {!loading && !postsEnd && (
+            <button onClick={getMorePost}>Load More</button>
+          )}
+          <Loader show={loading} />
+          {postsEnd && "You have reached the end!"}
         </div>
       </main>
     </>
