@@ -1,7 +1,4 @@
-import { UseAuth } from "@/lib/auth";
-import React from "react";
-
-function UserProfile({ user }) {
+function UserProfile({ user }: { user: any }) {
   const { photoURL, username, displayName } = user;
   return (
     <>

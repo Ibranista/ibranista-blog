@@ -12,7 +12,7 @@ export default function SignINOut() {
 
   const SignInButton = () => {
     const signInWithGoogle = async () => {
-      if (navigator.onLine) {
+      // if (navigator.onLine) {
         try {
           const provider = new GoogleAuthProvider();
           setIsClicked(true);
@@ -27,10 +27,12 @@ export default function SignINOut() {
             toast.success("Operation cancelled");
           }
         }
-      } else {
-        toast.error("check your internet connection and try again!");
-        setIsClicked(false);
-      }
+      // } 
+      // else {
+        // console.log("error");
+        // toast.error("check your internet connection and try again!");
+        // setIsClicked(false);
+      // }
     };
     return (
       <button

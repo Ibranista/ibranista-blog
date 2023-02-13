@@ -14,14 +14,21 @@ import React from "react";
 export async function getServerSideProps({ query }: { query: any }) {
   const { username } = query;
   const userDoc = await getUserWithUsername(username);
+
+  if (!userDoc) {
+    return {
+      notFound: true,
+    };
+  }
+
   let user = null;
   let posts = null;
 
   if (userDoc) {
     user = userDoc.data();
     const postsQuery = Query(
-      collection(firestore, "posts"),
-      where("author.uid", "==", userDoc.id),
+      collection(firestore, userDoc.ref.path, "posts"),
+      where("published", "==", true),
       orderBy("createdAt", "desc"),
       limit(5)
     );
@@ -29,16 +36,16 @@ export async function getServerSideProps({ query }: { query: any }) {
   }
 
   return {
-    props: { user: "ibrahim", posts: { name: "Ibrahim" } },
+    props: { user, posts },
   };
 }
 
-function UserProfilePage({ user }: { user: string }) {
+function UserProfilePage({ user, posts }: { user: string; posts: any }) {
   return (
     <>
       <main>
-        <h1>Hello</h1>
-        {user}
+        <UserProfile user={user} />
+        <PostFeed posts={posts} />
       </main>
     </>
   );
