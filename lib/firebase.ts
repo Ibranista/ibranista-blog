@@ -19,17 +19,11 @@ const firebaseConfig = {
   appId: "1:282092037222:web:7f4650366f24bee8abf9a7",
   measurementId: "G-BLEGVJHX9D",
 };
-let app: any;
-if (!firebase) {
-  // so, it will not be initialized if already initialized.
-  app = initializeApp(firebaseConfig);
-}
-export const auth = getAuth(app);
-export const firestore = getFirestore(app);
-export const storage = getStorage(app);
-connectFirestoreEmulator(firestore, "localhost", 8080);
-connectAuthEmulator(auth, "http://localhost:9099");
-
+// let app: any;
+// if (!firebase) {
+// so, it will not be initialized if already initialized.
+const app = initializeApp(firebaseConfig);
+// }
 /**
  * Convert a Firestore document to JSON
  * because the post doc has a time stamp on it
@@ -46,3 +40,12 @@ export function PostToJSON(doc: DocumentSnapshot) {
     updatedAt: data?.updatedAt.toMillis() || 0,
   };
 }
+
+export const auth = getAuth(app);
+export const firestore = getFirestore(app);
+export const storage = getStorage(app);
+connectAuthEmulator(auth, "http://localhost:9099");
+if (!firestore._settingsFrozen) {
+  connectFirestoreEmulator(firestore, "127.0.0.1", 8080);
+}
+// connectFirestoreEmulator(firestore, "localhost", 8080);
