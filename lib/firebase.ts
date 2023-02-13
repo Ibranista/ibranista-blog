@@ -1,7 +1,11 @@
 import firebase, { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { connectAuthEmulator, getAuth } from "firebase/auth";
 // import "firebase/firestore";
-import { DocumentSnapshot, getFirestore } from "firebase/firestore";
+import {
+  connectFirestoreEmulator,
+  DocumentSnapshot,
+  getFirestore,
+} from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import "firebase/auth";
 import "firebase/firestore";
@@ -23,6 +27,8 @@ if (!firebase) {
 export const auth = getAuth(app);
 export const firestore = getFirestore(app);
 export const storage = getStorage(app);
+connectFirestoreEmulator(firestore, "localhost", 8080);
+connectAuthEmulator(auth, "http://localhost:9099");
 
 /**
  * Convert a Firestore document to JSON

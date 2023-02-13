@@ -42,10 +42,18 @@ export default function Home(props: any) {
   const getMorePosts = async () => {
     setLoading(true);
     const last = posts[posts.length - 1];
+
     const cursor =
       typeof last.createdAt === "number"
         ? Timestamp.fromMillis(last.createdAt)
         : last.createdAt;
+
+    // const query = firestore
+    //   .collectionGroup('posts')
+    //   .where('published', '==', true)
+    //   .orderBy('createdAt', 'desc')
+    //   .startAfter(cursor)
+    //   .limit(LIMIT);
 
     const ref = collectionGroup(firestore, "posts");
     const postsQuery = query(
@@ -56,6 +64,7 @@ export default function Home(props: any) {
     );
 
     const newPosts = (await getDocs(postsQuery)).docs.map((doc) => doc.data());
+
     setPosts(posts.concat(newPosts));
     setLoading(false);
 
