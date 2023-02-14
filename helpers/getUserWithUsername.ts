@@ -15,10 +15,12 @@ export async function getUserWithUsername(username: object) {
 }
 
 export function postToJSON(doc: any) {
-  const data = doc.data();
+  let data = doc;
+  console.log("passed data: ", data);
+  data = data.map((docs) => {
+    return { ...data, createdAt: "hello" };
+  });
   return {
     ...data,
-    createdAt: data.createdAt.toMillis(),
-    updatedAt: data.updatedAt.toMillis(),
   };
 }

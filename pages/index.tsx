@@ -27,8 +27,10 @@ export async function getServerSideProps() {
   const ref = collectionGroup(firestore, "posts");
   const postsQuery = query(ref, where("published", "==", true), limit(LIMIT));
 
-  const posts = (await getDocs(postsQuery)).docs.map(postToJSON);
-
+  // const posts = (await getDocs(postsQuery)).docs.map(postToJSON);
+  const docResult = await getDocs(postsQuery);
+  let arrayData = docResult.docs.map((doc) => doc.data());
+  let posts = JSON.stringify(arrayData);
   return {
     props: { posts }, // will be passed to the page component as props
   };

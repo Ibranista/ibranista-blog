@@ -9,7 +9,9 @@ export default function PostFeed({
   admin: boolean;
 }) {
   return posts ? (
-    posts.map((post) => <PostItem post={post} key={post.slug} admin={admin} />)
+    JSON.parse(posts).map((post) => (
+      <PostItem post={post} key={post.slug} admin={admin} />
+    ))
   ) : (
     <h1>no posts yet!</h1>
   );
