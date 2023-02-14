@@ -40,38 +40,42 @@ export default function Home(props: any) {
   const [posts, setPosts] = useState(props.posts);
   const [loading, setLoading] = useState(false);
   const [postsEnd, setPostsEnd] = useState(false);
-
   const getMorePosts = async () => {
     setLoading(true);
-    const last = posts[posts.length - 1];
+    const last = JSON.parse(posts)[posts.length - 1];
+    if (last) {
+      const cursor =
+        typeof last.createdAt === "number"
+          ? Timestamp.fromMillis(last.createdAt)
+          : last.createdAt;
+      // const query = firestore
+      //   .collectionGroup('posts')
+      //   .where('published', '==', true)
+      //   .orderBy('createdAt', 'desc')
+      //   .startAfter(cursor)
+      //   .limit(LIMIT);
 
-    const cursor =
-      typeof last.createdAt === "number"
-        ? Timestamp.fromMillis(last.createdAt)
-        : last.createdAt;
+      const ref = collectionGroup(firestore, "posts");
+      const postsQuery = query(
+        ref,
+        where("published", "==", true),
+        startAfter(cursor),
+        limit(LIMIT)
+      );
 
-    // const query = firestore
-    //   .collectionGroup('posts')
-    //   .where('published', '==', true)
-    //   .orderBy('createdAt', 'desc')
-    //   .startAfter(cursor)
-    //   .limit(LIMIT);
+      const newPosts = (await getDocs(postsQuery)).docs.map((doc) =>
+        doc.data()
+      );
 
-    const ref = collectionGroup(firestore, "posts");
-    const postsQuery = query(
-      ref,
-      where("published", "==", true),
-      startAfter(cursor),
-      limit(LIMIT)
-    );
+      setPosts(posts.concat(newPosts));
+      setLoading(false);
 
-    const newPosts = (await getDocs(postsQuery)).docs.map((doc) => doc.data());
-
-    setPosts(posts.concat(newPosts));
-    setLoading(false);
-
-    if (newPosts.length < LIMIT) {
+      if (newPosts.length < LIMIT) {
+        setPostsEnd(true);
+      }
+    } else {
       setPostsEnd(true);
+      setLoading(false);
     }
   };
 
