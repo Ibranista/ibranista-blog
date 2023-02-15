@@ -40,14 +40,17 @@ export default function Home(props: any) {
   const [posts, setPosts] = useState(props.posts);
   const [loading, setLoading] = useState(false);
   const [postsEnd, setPostsEnd] = useState(false);
+  console.log("the posts: ", JSON.parse(posts).length);
   const getMorePosts = async () => {
     setLoading(true);
-    const last = JSON.parse(posts)[posts.length - 1];
+    const last = JSON.parse(posts)[JSON.parse(posts).length - 1];
+    console.log("last: ", last);
     if (last) {
       const cursor =
         typeof last.createdAt === "number"
           ? Timestamp.fromMillis(last.createdAt)
           : last.createdAt;
+      console.log("cursor: ", cursor);
       // const query = firestore
       //   .collectionGroup('posts')
       //   .where('published', '==', true)
@@ -59,7 +62,7 @@ export default function Home(props: any) {
       const postsQuery = query(
         ref,
         where("published", "==", true),
-        startAfter(cursor),
+        startAfter(1000),
         limit(LIMIT)
       );
 
@@ -97,9 +100,9 @@ export default function Home(props: any) {
         >
           Enter
         </Link>
-        <div>
+        {/* <div>
           <Loader show />
-        </div>
+        </div> */}
         <div>
           <PostFeed posts={posts} admin={false} />
           {!loading && !postsEnd && (
