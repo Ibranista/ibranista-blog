@@ -28,6 +28,7 @@ function PostItem({ post, admin = false }) {
       <Link href={`/${post.username}/${post.slug}`}>
         <h2>{post.title}</h2>
       </Link>
+      <p>{post.content}</p>
       <footer>
         <span>
           {wordCount} words. {minutesToRead} {wordCount > 150 ? "min" : "sec"}{" "}
