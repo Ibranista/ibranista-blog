@@ -15,9 +15,9 @@ import {
   startAfter,
   Timestamp,
   where,
+  orderBy,
 } from "firebase/firestore";
 import { firestore } from "@/lib/firebase";
-import { orderBy } from "lodash";
 import { postToJSON } from "@/helpers/getUserWithUsername";
 import { useState } from "react";
 import PostFeed from "@/components/PostFeed";
@@ -25,7 +25,12 @@ import PostFeed from "@/components/PostFeed";
 const LIMIT = 1;
 export async function getServerSideProps() {
   const ref = collectionGroup(firestore, "posts");
-  const postsQuery = query(ref, where("published", "==", true), limit(LIMIT));
+  const postsQuery = query(
+    ref,
+    where("published", "==", true),
+    orderBy("createdAt", "desc"),
+    limit(LIMIT)
+  );
 
   // const posts = (await getDocs(postsQuery)).docs.map(postToJSON);
   const docResult = await getDocs(postsQuery);
@@ -42,42 +47,24 @@ export default function Home(props: any) {
   const getMorePosts = async () => {
     setLoading(true);
     const last = posts[posts.length - 1];
-    console.log("hello");
-    if (last) {
-      const cursor =
-        typeof last.createdAt === "number"
-          ? Timestamp.fromMillis(last.createdAt)
-          : last.createdAt;
-      console.log("created At: ", Timestamp.fromMillis(last.createdAt));
-      // const query = firestore
-      //   .collectionGroup('posts')
-      //   .where('published', '==', true)
-      //   .orderBy('createdAt', 'desc')
-      //   .startAfter(cursor)
-      //   .limit(LIMIT);
-
-      const ref = collectionGroup(firestore, "posts");
-      const postsQuery = query(
-        ref,
-        where("published", "==", true),
-        // orderBy("createdAt", "desc"),
-        startAfter(last),
-        limit(LIMIT)
-      );
-
-      const newPosts = (await getDocs(postsQuery)).docs.map((doc) =>
-        doc.data()
-      );
-
-      setPosts(posts.concat(newPosts));
-      setLoading(false);
-
-      if (newPosts.length < LIMIT) {
-        setPostsEnd(true);
-      }
-    } else {
+    const cursor =
+      typeof last.createdAt === "number"
+        ? Timestamp.fromMillis(last.createdAt)
+        : last.createdAt;
+    const nextQuery = query(
+      collectionGroup(firestore, "posts"),
+      where("published", "==", true),
+      orderBy("createdAt", "desc"),
+      startAfter(cursor),
+      limit(1)
+    );
+    const newPosts = (await getDocs(nextQuery)).docs.map((doc) => doc.data());
+    console.log("new posts: ", newPosts);
+    setPosts(posts.concat(newPosts));
+    setLoading(false);
+    if (newPosts.length == 0) {
       setPostsEnd(true);
-      setLoading(false);
+      // setLoading(false);
     }
   };
 
