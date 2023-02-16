@@ -35,13 +35,7 @@ export async function getServerSideProps({ query }: { query: any }) {
       orderBy("createdAt", "desc"),
       limit(5)
     );
-    posts = (await getDocs(postsQuery)).docs.map((doc) => {
-      const data = doc.data();
-      // change the data created at to millis
-      const createdAt = data.createdAt.toMillis();
-      const updatedAt = data.updatedAt.toMillis();
-      return { ...data, createdAt, updatedAt };
-    });
+    posts = (await getDocs(postsQuery)).docs.map(postToJSON);
   }
   return {
     props: { user, posts },
