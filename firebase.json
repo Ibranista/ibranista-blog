@@ -33,7 +33,7 @@
     "ui": {
       "enabled": true
     },
-    "singleProjectMode": false
+    "singleProjectMode": true
   },
   "database": {
     "rules": "database.rules.json"
