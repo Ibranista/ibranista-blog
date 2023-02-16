@@ -1,108 +1,42 @@
-[debug] [2023-02-15T06:33:15.774Z] ----------------------------------------------------------------------
-[debug] [2023-02-15T06:33:15.777Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\user\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start --import=./blog-2/
-[debug] [2023-02-15T06:33:15.777Z] CLI Version:   11.22.0
-[debug] [2023-02-15T06:33:15.777Z] Platform:      win32
-[debug] [2023-02-15T06:33:15.778Z] Node Version:  v16.16.0
-[debug] [2023-02-15T06:33:15.779Z] Time:          Wed Feb 15 2023 07:33:15 GMT+0100 (Central European Standard Time)
-[debug] [2023-02-15T06:33:15.779Z] ----------------------------------------------------------------------
+[debug] [2023-02-16T13:59:00.766Z] ----------------------------------------------------------------------
+[debug] [2023-02-16T13:59:00.769Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\user\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start --import=./blog-2 --only auth,firestore
+[debug] [2023-02-16T13:59:00.770Z] CLI Version:   11.22.0
+[debug] [2023-02-16T13:59:00.770Z] Platform:      win32
+[debug] [2023-02-16T13:59:00.770Z] Node Version:  v18.14.0
+[debug] [2023-02-16T13:59:00.772Z] Time:          Thu Feb 16 2023 14:59:00 GMT+0100 (Central European Standard Time)
+[debug] [2023-02-16T13:59:00.772Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2023-02-15T06:33:15.914Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2023-02-15T06:33:15.914Z] > authorizing via signed-in user (techofreact@gmail.com)
-[debug] [2023-02-15T06:33:16.488Z] java version "19.0.1" 2022-10-18
+[debug] [2023-02-16T13:59:00.923Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-02-16T13:59:00.924Z] > authorizing via signed-in user (techofreact@gmail.com)
+[debug] [2023-02-16T13:59:01.101Z] java version "19.0.1" 2022-10-18
 
-[debug] [2023-02-15T06:33:16.489Z] Java(TM) SE Runtime Environment (build 19.0.1+10-21)
+[debug] [2023-02-16T13:59:01.102Z] Java(TM) SE Runtime Environment (build 19.0.1+10-21)
 Java HotSpot(TM) 64-Bit Server VM (build 19.0.1+10-21, mixed mode, sharing)
 
-[debug] [2023-02-15T06:33:16.508Z] Parsed Java major version: 19
-[info] i  emulators: Starting emulators: auth, functions, firestore, database, storage {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, functions, firestore, database, storage"}}
-[debug] [2023-02-15T06:33:16.538Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-02-15T06:33:16.538Z] [auth] Authentication Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-02-15T06:33:16.539Z] [firestore] Firestore Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-02-15T06:33:16.539Z] [firestore.websocket] websocket server for firestore only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-02-15T06:33:16.539Z] [database] Database Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-02-15T06:33:16.539Z] [storage] Storage Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-02-15T06:33:16.540Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8080}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"database":[{"address":"127.0.0.1","family":"IPv4","port":9000}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}]},"metadata":{"message":"assigned listening specs for emulators"}}
-[warn] !  emulators: It seems that you are running multiple instances of the emulator suite for project ibranista-blog. This may result in unexpected behavior. 
-[debug] [2023-02-15T06:33:16.555Z] [hub] writing locator at C:\Users\user\AppData\Local\Temp\hub-ibranista-blog.json
-[debug] [2023-02-15T06:33:16.578Z] [functions] Functions Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-02-15T06:33:16.579Z] [eventarc] Eventarc Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
-[debug] [2023-02-15T06:33:16.579Z] late-assigned ports for functions and eventarc emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8080}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"database":[{"address":"127.0.0.1","family":"IPv4","port":9000}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5001}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":9299}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
-[warn] !  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: hosting, pubsub {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mhosting, pubsub\u001b[22m"}}
-[debug] [2023-02-15T06:33:16.586Z] defaultcredentials: writing to file C:\Users\user\AppData\Roaming\firebase\techofreact_gmail_com_application_default_credentials.json
-[debug] [2023-02-15T06:33:16.592Z] Setting GAC to C:\Users\user\AppData\Roaming\firebase\techofreact_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to C:\\Users\\user\\AppData\\Roaming\\firebase\\techofreact_gmail_com_application_default_credentials.json"}}
-[debug] [2023-02-15T06:33:16.596Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/ibranista-blog/adminSdkConfig [none]
-[debug] [2023-02-15T06:33:17.834Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/ibranista-blog/adminSdkConfig 200
-[debug] [2023-02-15T06:33:17.835Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/ibranista-blog/adminSdkConfig {"projectId":"ibranista-blog","databaseURL":"https://ibranista-blog-default-rtdb.firebaseio.com","storageBucket":"ibranista-blog.appspot.com","locationId":"us-central"}
+[debug] [2023-02-16T13:59:01.116Z] Parsed Java major version: 19
+[info] i  emulators: Starting emulators: auth, firestore {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: auth, firestore"}}
+[debug] [2023-02-16T13:59:01.164Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-02-16T13:59:01.164Z] [auth] Authentication Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-02-16T13:59:01.164Z] [firestore] Firestore Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-02-16T13:59:01.164Z] [firestore.websocket] websocket server for firestore only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2023-02-16T13:59:01.165Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8080}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2023-02-16T13:59:01.181Z] [hub] writing locator at C:\Users\user\AppData\Local\Temp\hub-ibranista-blog.json
 [info] i  firestore: Importing data from F:\firebase\ibranista-blog\blog-2\firestore_export\firestore_export.overall_export_metadata {"metadata":{"emulator":{"name":"firestore"},"message":"Importing data from F:\\firebase\\ibranista-blog\\blog-2\\firestore_export\\firestore_export.overall_export_metadata"}}
-[debug] [2023-02-15T06:33:17.938Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
-[debug] [2023-02-15T06:33:17.938Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
-[debug] [2023-02-15T06:33:17.939Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","C:\\Users\\user\\.cache\\firebase\\emulators\\cloud-firestore-emulator-v1.15.1.jar","--host","127.0.0.1","--port",8080,"--websocket_port",9150,"--project_id","ibranista-blog","--seed_from_export","F:\\firebase\\ibranista-blog\\blog-2\\firestore_export\\firestore_export.overall_export_metadata","--rules","F:\\firebase\\ibranista-blog\\firestore.rules","--single_project_mode",true,"--functions_emulator","127.0.0.1:5001"],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\user\\\\.cache\\\\firebase\\\\emulators\\\\cloud-firestore-emulator-v1.15.1.jar\",\"--host\",\"127.0.0.1\",\"--port\",8080,\"--websocket_port\",9150,\"--project_id\",\"ibranista-blog\",\"--seed_from_export\",\"F:\\\\firebase\\\\ibranista-blog\\\\blog-2\\\\firestore_export\\\\firestore_export.overall_export_metadata\",\"--rules\",\"F:\\\\firebase\\\\ibranista-blog\\\\firestore.rules\",\"--single_project_mode\",true,\"--functions_emulator\",\"127.0.0.1:5001\"],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false}"}}
+[debug] [2023-02-16T13:59:01.204Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-02-16T13:59:01.204Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
+[debug] [2023-02-16T13:59:01.204Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","C:\\Users\\user\\.cache\\firebase\\emulators\\cloud-firestore-emulator-v1.15.1.jar","--host","127.0.0.1","--port",8080,"--websocket_port",9150,"--project_id","ibranista-blog","--seed_from_export","F:\\firebase\\ibranista-blog\\blog-2\\firestore_export\\firestore_export.overall_export_metadata","--rules","F:\\firebase\\ibranista-blog\\firestore.rules","--single_project_mode",true],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\user\\\\.cache\\\\firebase\\\\emulators\\\\cloud-firestore-emulator-v1.15.1.jar\",\"--host\",\"127.0.0.1\",\"--port\",8080,\"--websocket_port\",9150,\"--project_id\",\"ibranista-blog\",\"--seed_from_export\",\"F:\\\\firebase\\\\ibranista-blog\\\\blog-2\\\\firestore_export\\\\firestore_export.overall_export_metadata\",\"--rules\",\"F:\\\\firebase\\\\ibranista-blog\\\\firestore.rules\",\"--single_project_mode\",true],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false}"}}
 [info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
 [info] +  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
-[debug] [2023-02-15T06:33:20.391Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/ibranista-blog [none]
-[debug] [2023-02-15T06:33:21.041Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/ibranista-blog 200
-[debug] [2023-02-15T06:33:21.041Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/ibranista-blog {"projectId":"ibranista-blog","projectNumber":"282092037222","displayName":"Ibranista-Blog","name":"projects/ibranista-blog","resources":{"hostingSite":"ibranista-blog","realtimeDatabaseInstance":"ibranista-blog-default-rtdb","storageBucket":"ibranista-blog.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_aa9ffe29-5b0f-46fa-ac5a-35298718192c"}
-[debug] [2023-02-15T06:33:21.042Z] database rules config:  [{"instance":"ibranista-blog-default-rtdb","rules":"F:\\firebase\\ibranista-blog\\database.rules.json"}]
-[debug] [2023-02-15T06:33:21.050Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: projectId"}}
-[debug] [2023-02-15T06:33:21.050Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: auto_download"}}
-[debug] [2023-02-15T06:33:21.050Z] Ignoring unsupported arg: rules {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: rules"}}
-[debug] [2023-02-15T06:33:21.051Z] Starting Database Emulator with command {"binary":"java","args":["-Duser.language=en","-jar","C:\\Users\\user\\.cache\\firebase\\emulators\\firebase-database-emulator-v4.11.0.jar","--host","127.0.0.1","--port",9000,"--single_project_mode","Warning","--functions_emulator_host","127.0.0.1","--functions_emulator_port",5001],"optionalArgs":["port","host","functions_emulator_port","functions_emulator_host","single_project_mode"],"joinArgs":false} {"metadata":{"emulator":{"name":"database"},"message":"Starting Database Emulator with command {\"binary\":\"java\",\"args\":[\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\user\\\\.cache\\\\firebase\\\\emulators\\\\firebase-database-emulator-v4.11.0.jar\",\"--host\",\"127.0.0.1\",\"--port\",9000,\"--single_project_mode\",\"Warning\",\"--functions_emulator_host\",\"127.0.0.1\",\"--functions_emulator_port\",5001],\"optionalArgs\":[\"port\",\"host\",\"functions_emulator_port\",\"functions_emulator_host\",\"single_project_mode\"],\"joinArgs\":false}"}}
-[info] i  database: Database Emulator logging to database-debug.log {"metadata":{"emulator":{"name":"database"},"message":"Database Emulator logging to \u001b[1mdatabase-debug.log\u001b[22m"}}
 [info] i  auth: Importing config from F:\firebase\ibranista-blog\blog-2\auth_export\config.json {"metadata":{"emulator":{"name":"auth"},"message":"Importing config from F:\\firebase\\ibranista-blog\\blog-2\\auth_export\\config.json"}}
 [info] i  auth: Importing accounts from F:\firebase\ibranista-blog\blog-2\auth_export\accounts.json {"metadata":{"emulator":{"name":"auth"},"message":"Importing accounts from F:\\firebase\\ibranista-blog\\blog-2\\auth_export\\accounts.json"}}
-[debug] [2023-02-15T06:33:33.821Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
-[debug] [2023-02-15T06:33:35.267Z] Temp file directory for storage emulator: C:\Users\user\AppData\Local\Temp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: C:\\Users\\user\\AppData\\Local\\Temp/firebase/storage/blobs"}}
-[debug] [2023-02-15T06:33:35.285Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
-[debug] [2023-02-15T06:33:35.285Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
-[debug] [2023-02-15T06:33:35.285Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\user\\.cache\\firebase\\emulators\\ui-v1.11.2\\server\\server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\user\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.11.2\\\\server\\\\server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[debug] [2023-02-16T13:59:15.722Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2023-02-16T13:59:15.722Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2023-02-16T13:59:15.722Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\user\\.cache\\firebase\\emulators\\ui-v1.11.2\\server\\server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\user\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.11.2\\\\server\\\\server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
 [info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
-[debug] [2023-02-15T06:33:35.511Z] Web / API server started at 127.0.0.1:4000
+[debug] [2023-02-16T13:59:15.882Z] Web / API server started at 127.0.0.1:4000
  {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at 127.0.0.1:4000\n"}}
-[debug] [2023-02-15T06:33:35.511Z] Web / API server started at ::1:4000
+[debug] [2023-02-16T13:59:15.882Z] Web / API server started at ::1:4000
  {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at ::1:4000\n"}}
-[info] i  functions: Watching "F:\firebase\ibranista-blog\functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"F:\\firebase\\ibranista-blog\\functions\" for Cloud Functions..."}}
-[debug] [2023-02-15T06:33:35.551Z] Validating nodejs source
-[warn] !  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
-[warn] !  functions: Please note that there will be breaking changes when you upgrade. 
-[debug] [2023-02-15T06:33:43.879Z] > [functions] package.json contents: {
-  "name": "functions",
-  "scripts": {
-    "build": "tsc",
-    "build:watch": "tsc --watch",
-    "serve": "npm run build && firebase emulators:start --only functions",
-    "shell": "npm run build && firebase functions:shell",
-    "start": "npm run shell",
-    "deploy": "firebase deploy --only functions",
-    "logs": "firebase functions:log"
-  },
-  "engines": {
-    "node": "16"
-  },
-  "main": "lib/index.js",
-  "dependencies": {
-    "firebase-admin": "^10.2.0",
-    "firebase-functions": "^3.21.0"
-  },
-  "devDependencies": {
-    "typescript": "^4.6.4"
-  },
-  "private": true
-}
-[debug] [2023-02-15T06:33:43.879Z] Building nodejs source
-[debug] [2023-02-15T06:33:43.879Z] Failed to find version of module node: reached end of search path F:\firebase\ibranista-blog\functions\node_modules
-[info] +  functions: Using node@16 from host. 
-[debug] [2023-02-15T06:33:43.882Z] Could not find functions.yaml. Must use http discovery
-[debug] [2023-02-15T06:33:43.892Z] Found firebase-functions binary at 'F:\firebase\ibranista-blog\functions\node_modules\.bin\firebase-functions'
-[debug] [2023-02-15T06:33:46.368Z] Serving at port 8397
-
-[debug] [2023-02-15T06:33:46.386Z] Got response from /__/functions.yaml {"endpoints":{},"specVersion":"v1alpha1","requiredAPIs":[]}
-[debug] [2023-02-15T06:33:46.392Z] shutdown requested via /__/quitquitquit
-
-[info] +  functions: Loaded functions definitions from source: . {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: ."}}
-[debug] [2023-02-15T06:33:46.517Z] >>> [apiv2][query] PUT http://127.0.0.1:9000/.settings/rules.json ns=ibranista-blog-default-rtdb
-[debug] [2023-02-15T06:33:46.517Z] >>> [apiv2][body] PUT http://127.0.0.1:9000/.settings/rules.json "{\n  \"rules\": {\n    \".read\": \"now < 1678834800000\",  // 2023-3-15\n    \".write\": \"now < 1678834800000\",  // 2023-3-15\n  }\n}"
-[debug] [2023-02-15T06:33:47.190Z] <<< [apiv2][status] PUT http://127.0.0.1:9000/.settings/rules.json 200
-[debug] [2023-02-15T06:33:47.191Z] <<< [apiv2][body] PUT http://127.0.0.1:9000/.settings/rules.json {"status":"ok"}
 [info] 
 ┌─────────────────────────────────────────────────────────────┐
 │ ✔  All emulators ready! It is now safe to connect your app. │
@@ -114,16 +48,22 @@ Java HotSpot(TM) 64-Bit Server VM (build 19.0.1+10-21, mixed mode, sharing)
 ├────────────────┼────────────────┼─────────────────────────────────┤
 │ Authentication │ 127.0.0.1:9099 │ http://127.0.0.1:4000/auth      │
 ├────────────────┼────────────────┼─────────────────────────────────┤
-│ Functions      │ 127.0.0.1:5001 │ http://127.0.0.1:4000/functions │
-├────────────────┼────────────────┼─────────────────────────────────┤
 │ Firestore      │ 127.0.0.1:8080 │ http://127.0.0.1:4000/firestore │
-├────────────────┼────────────────┼─────────────────────────────────┤
-│ Database       │ 127.0.0.1:9000 │ http://127.0.0.1:4000/database  │
-├────────────────┼────────────────┼─────────────────────────────────┤
-│ Storage        │ 127.0.0.1:9199 │ http://127.0.0.1:4000/storage   │
 └────────────────┴────────────────┴─────────────────────────────────┘
   Emulator Hub running at 127.0.0.1:4400
   Other reserved ports: 4500, 9150
 
 Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
  
+[info] i  firestore: Change detected, updating rules... 
+[debug] [2023-02-16T14:00:36.829Z] >>> [apiv2][query] PUT http://127.0.0.1:8080/emulator/v1/projects/ibranista-blog:securityRules [none]
+[debug] [2023-02-16T14:00:36.830Z] >>> [apiv2][body] PUT http://127.0.0.1:8080/emulator/v1/projects/ibranista-blog:securityRules {"ignore_errors":true,"rules":{"files":[{"name":"security.rules","content":"rules_version = '2';\r\nservice cloud.firestore {\r\n  match /databases/{database}/documents {\r\n    match /{document=**} {\r\n      allow read, write;\r\n    }\r\n  }\r\n}"}]}}
+[info] i  firestore: Change detected, updating rules... 
+[debug] [2023-02-16T14:00:37.286Z] >>> [apiv2][query] PUT http://127.0.0.1:8080/emulator/v1/projects/ibranista-blog:securityRules [none]
+[debug] [2023-02-16T14:00:37.287Z] >>> [apiv2][body] PUT http://127.0.0.1:8080/emulator/v1/projects/ibranista-blog:securityRules {"ignore_errors":true,"rules":{"files":[{"name":"security.rules","content":"rules_version = '2';\r\nservice cloud.firestore {\r\n  match /databases/{database}/documents {\r\n    match /{document=**} {\r\n      allow read, write;\r\n    }\r\n  }\r\n}"}]}}
+[debug] [2023-02-16T14:00:38.075Z] <<< [apiv2][status] PUT http://127.0.0.1:8080/emulator/v1/projects/ibranista-blog:securityRules 200
+[debug] [2023-02-16T14:00:38.075Z] <<< [apiv2][body] PUT http://127.0.0.1:8080/emulator/v1/projects/ibranista-blog:securityRules {}
+[info] +  firestore: Rules updated. 
+[debug] [2023-02-16T14:00:38.078Z] <<< [apiv2][status] PUT http://127.0.0.1:8080/emulator/v1/projects/ibranista-blog:securityRules 200
+[debug] [2023-02-16T14:00:38.078Z] <<< [apiv2][body] PUT http://127.0.0.1:8080/emulator/v1/projects/ibranista-blog:securityRules {}
+[info] +  firestore: Rules updated. 
