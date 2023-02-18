@@ -25,7 +25,11 @@ type PostItemProps = {
 
 export default function PostFeed({ posts, admin }: PostFeedProps) {
   return posts ? (
-    posts.map((post) => <PostItem post={post} key={post.slug} admin={admin} />)
+    <>
+      {posts.map((post) => (
+        <PostItem post={post} key={post.slug} admin={admin} />
+      ))}
+    </>
   ) : (
     <h1>no posts yet!</h1>
   );

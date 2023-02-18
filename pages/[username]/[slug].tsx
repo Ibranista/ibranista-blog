@@ -12,12 +12,19 @@ import {
 } from "firebase/firestore";
 import React from "react";
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({
+  params,
+}: {
+  params: { username: string; slug: string };
+}): Promise<{
+  props: { post: object | undefined; path: string | undefined };
+  revalidate: number;
+}> {
   const { username, slug } = params;
   const userDoc = await getUserWithUsername(username);
   // returns array of objects containing user properties
-  let post;
-  let path;
+  let post: object | undefined;
+  let path: string | undefined;
   if (userDoc) {
     const postRef = doc(firestore, userDoc.ref.path, "posts", slug);
     post = PostToJSON(await getDoc(postRef));
@@ -40,7 +47,6 @@ export async function getStaticProps({ params }) {
     revalidate: 5000, //milliseconds
   };
 }
-
 export async function getStaticPaths() {
   const postSnapshot = await getDocs(collectionGroup(firestore, "posts"));
   const paths = postSnapshot.docs.map((doc) => {
@@ -54,11 +60,23 @@ export async function getStaticPaths() {
   //fall back to regular serverside rendering
 }
 
-function PostPage(props) {
+function PostPage(props: {
+  post: {
+    uid: string;
+    createdAt: number;
+    published: boolean;
+    title: string;
+    heartCount: number;
+    content: string;
+    updatedAt: number;
+    username: string;
+    slug: string;
+  };
+}) {
   console.log("props: ", props.post);
   return (
     <>
-      <PostFeed posts={[props.post]} />
+      <PostFeed posts={[props.post]} admin={true} />
     </>
   );
 }
