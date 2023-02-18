@@ -3,7 +3,7 @@ function UserProfile({ user }: { user: any }) {
   return (
     <>
       <div className="box-center">
-        <img src={photoURL || "/hacker.png"} className="card-img-center" />
+        <img src={photoURL || "/useravatar.jpeg"} className="card-img-center" />
         <p>
           <i>@{username}</i>
         </p>

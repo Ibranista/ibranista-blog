@@ -15,9 +15,9 @@ import {
   startAfter,
   Timestamp,
   where,
+  orderBy,
 } from "firebase/firestore";
 import { firestore } from "@/lib/firebase";
-import { orderBy } from "lodash";
 import { postToJSON } from "@/helpers/getUserWithUsername";
 import { useState } from "react";
 import PostFeed from "@/components/PostFeed";
@@ -25,12 +25,16 @@ import PostFeed from "@/components/PostFeed";
 const LIMIT = 1;
 export async function getServerSideProps() {
   const ref = collectionGroup(firestore, "posts");
-  const postsQuery = query(ref, where("published", "==", true), limit(LIMIT));
+  const postsQuery = query(
+    ref,
+    where("published", "==", true),
+    orderBy("createdAt", "desc"),
+    limit(LIMIT)
+  );
 
   // const posts = (await getDocs(postsQuery)).docs.map(postToJSON);
   const docResult = await getDocs(postsQuery);
-  let arrayData = docResult.docs.map((doc) => doc.data());
-  let posts = JSON.stringify(arrayData);
+  let posts = docResult.docs.map(postToJSON);
   return {
     props: { posts }, // will be passed to the page component as props
   };
@@ -40,38 +44,27 @@ export default function Home(props: any) {
   const [posts, setPosts] = useState(props.posts);
   const [loading, setLoading] = useState(false);
   const [postsEnd, setPostsEnd] = useState(false);
-
   const getMorePosts = async () => {
     setLoading(true);
     const last = posts[posts.length - 1];
-
     const cursor =
       typeof last.createdAt === "number"
         ? Timestamp.fromMillis(last.createdAt)
         : last.createdAt;
-
-    // const query = firestore
-    //   .collectionGroup('posts')
-    //   .where('published', '==', true)
-    //   .orderBy('createdAt', 'desc')
-    //   .startAfter(cursor)
-    //   .limit(LIMIT);
-
-    const ref = collectionGroup(firestore, "posts");
-    const postsQuery = query(
-      ref,
+    const nextQuery = query(
+      collectionGroup(firestore, "posts"),
       where("published", "==", true),
+      orderBy("createdAt", "desc"),
       startAfter(cursor),
-      limit(LIMIT)
+      limit(1)
     );
-
-    const newPosts = (await getDocs(postsQuery)).docs.map((doc) => doc.data());
-
+    const newPosts = (await getDocs(nextQuery)).docs.map((doc) => doc.data());
+    console.log("new posts: ", newPosts);
     setPosts(posts.concat(newPosts));
     setLoading(false);
-
-    if (newPosts.length < LIMIT) {
+    if (newPosts.length == 0) {
       setPostsEnd(true);
+      // setLoading(false);
     }
   };
 
@@ -93,9 +86,9 @@ export default function Home(props: any) {
         >
           Enter
         </Link>
-        <div>
+        {/* <div>
           <Loader show />
-        </div>
+        </div> */}
         <div>
           <PostFeed posts={posts} admin={false} />
           {!loading && !postsEnd && (

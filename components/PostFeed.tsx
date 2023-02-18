@@ -8,18 +8,18 @@ export default function PostFeed({
   posts: Array<object>;
   admin: boolean;
 }) {
+  console.log("hello posts: ", posts);
   return posts ? (
-    JSON.parse(posts).map((post) => (
-      <PostItem post={post} key={post.slug} admin={admin} />
-    ))
+    posts.map((post) => <PostItem post={post} key={post.slug} admin={admin} />)
   ) : (
     <h1>no posts yet!</h1>
   );
 }
 
 function PostItem({ post, admin = false }) {
-  const wordCount = post?.content.trim().split(/\s+/g).length;
-  const minutesToRead = (wordCount / 100 + 1).toFixed(0);
+  const wordCount = (post?.content || "").trim().split(/\s+/g).length;
+  console.log("word count: ", wordCount);
+  const minutesToRead = Math.ceil(wordCount / 100);
   return (
     <div className="card">
       <Link href={`/${post.username}`}>
@@ -28,9 +28,11 @@ function PostItem({ post, admin = false }) {
       <Link href={`/${post.username}/${post.slug}`}>
         <h2>{post.title}</h2>
       </Link>
+      <p>{post.content}</p>
       <footer>
         <span>
-          {wordCount} words. {minutesToRead} min read
+          {wordCount} words. {minutesToRead} {wordCount > 150 ? "min" : "sec"}{" "}
+          read
         </span>
         <span>❤️ {post.heartCount || 0} Hearts</span>
       </footer>
