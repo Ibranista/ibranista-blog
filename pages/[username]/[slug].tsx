@@ -1,6 +1,12 @@
 import { getUserWithUsername } from "@/helpers/getUserWithUsername";
 import { firestore, PostToJSON } from "@/lib/firebase";
-import { collection, doc, getDoc } from "firebase/firestore";
+import {
+  collection,
+  collectionGroup,
+  doc,
+  getDoc,
+  getDocs,
+} from "firebase/firestore";
 import React from "react";
 
 export async function getStaticProps({ params }) {
@@ -18,6 +24,19 @@ export async function getStaticProps({ params }) {
     props: { post, path },
     revalidate: 5000, //milliseconds
   };
+}
+
+export async function getStaticPaths() {
+  const postSnapshot = await getDocs(collectionGroup(firestore, "posts"));
+  const paths = postSnapshot.docs.map((doc) => {
+    const { slug, username } = doc.data();
+    return {
+      params: { username, slug },
+    };
+  });
+
+  return { paths, fallback: "blocking" };
+   //fall back to regular serverside rendering
 }
 
 function PostPage() {
