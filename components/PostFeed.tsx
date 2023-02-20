@@ -1,22 +1,41 @@
 import Link from "next/link";
 import React from "react";
 
-export default function PostFeed({
-  posts,
-  admin,
-}: {
-  posts: Array<object>;
+type Post = {
+  uid: string;
+  createdAt: number;
+  published: boolean;
+  title: string;
+  heartCount: number;
+  content: string;
+  updatedAt: number;
+  username: string;
+  slug: string;
+};
+
+type PostFeedProps = {
+  posts: Post[] | null;
   admin: boolean;
-}) {
-  console.log("hello posts: ", posts);
+};
+
+type PostItemProps = {
+  post: Post;
+  admin?: boolean;
+};
+
+export default function PostFeed({ posts, admin }: PostFeedProps) {
   return posts ? (
-    posts.map((post) => <PostItem post={post} key={post.slug} admin={admin} />)
+    <>
+      {posts.map((post) => (
+        <PostItem post={post} key={post.slug} admin={admin} />
+      ))}
+    </>
   ) : (
     <h1>no posts yet!</h1>
   );
 }
 
-function PostItem({ post, admin = false }) {
+function PostItem({ post, admin = false }: PostItemProps) {
   const wordCount = (post?.content || "").trim().split(/\s+/g).length;
   console.log("word count: ", wordCount);
   const minutesToRead = Math.ceil(wordCount / 100);

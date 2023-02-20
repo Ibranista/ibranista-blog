@@ -1,4 +1,4 @@
-import firebase, { initializeApp } from "firebase/app";
+import firebase, { getApp, initializeApp } from "firebase/app";
 import { connectAuthEmulator, getAuth } from "firebase/auth";
 // import "firebase/firestore";
 import {
@@ -19,11 +19,30 @@ const firebaseConfig = {
   appId: "1:282092037222:web:7f4650366f24bee8abf9a7",
   measurementId: "G-BLEGVJHX9D",
 };
+
+function createFirebaseApp(config) {
+  try {
+    return getApp();
+  } catch {
+    return initializeApp(config);
+  }
+}
+
+const firebaseApp = createFirebaseApp(firebaseConfig);
+
 // let app: any;
 // if (!firebase) {
 // so, it will not be initialized if already initialized.
-const app = initializeApp(firebaseConfig);
+
 // }
+export const auth = getAuth(firebaseApp);
+export const firestore = getFirestore(firebaseApp);
+export const storage = getStorage(firebaseApp);
+connectAuthEmulator(auth, "http://localhost:9099");
+if (!firestore._settingsFrozen) {
+  connectFirestoreEmulator(firestore, "127.0.0.1", 8080);
+}
+// connectFirestoreEmulator(firestore, "localhost", 8080);
 /**
  * Convert a Firestore document to JSON
  * because the post doc has a time stamp on it
@@ -31,7 +50,10 @@ const app = initializeApp(firebaseConfig);
  * @param {DocumentSnapshot} doc
  */
 
-export function PostToJSON(doc: DocumentSnapshot) {
+export function PostToJSON(doc: DocumentSnapshot): {
+  createdAt: any;
+  updatedAt: any;
+} {
   const data = doc.data();
   return {
     ...data,
@@ -40,12 +62,3 @@ export function PostToJSON(doc: DocumentSnapshot) {
     updatedAt: data?.updatedAt.toMillis() || 0,
   };
 }
-
-export const auth = getAuth(app);
-export const firestore = getFirestore(app);
-export const storage = getStorage(app);
-connectAuthEmulator(auth, "http://localhost:9099");
-if (!firestore._settingsFrozen) {
-  connectFirestoreEmulator(firestore, "127.0.0.1", 8080);
-}
-// connectFirestoreEmulator(firestore, "localhost", 8080);
