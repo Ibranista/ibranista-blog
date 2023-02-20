@@ -32,7 +32,6 @@ export async function getServerSideProps() {
     limit(LIMIT)
   );
 
-  // const posts = (await getDocs(postsQuery)).docs.map(postToJSON);
   const docResult = await getDocs(postsQuery);
   let posts = docResult.docs.map(postToJSON);
   return {
