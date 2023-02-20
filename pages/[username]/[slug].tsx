@@ -1,9 +1,12 @@
 import PostFeed from "@/components/PostFeed";
+import PostContent from "@/components/PostContent";
+import styles from "@/styles/Post.module.css";
 import { getUserWithUsername } from "@/helpers/getUserWithUsername";
 import { firestore, PostToJSON } from "@/lib/firebase";
 import {
   collection,
   collectionGroup,
+  CollectionReference,
   doc,
   getDoc,
   getDocs,
@@ -11,7 +14,7 @@ import {
   where,
 } from "firebase/firestore";
 import React from "react";
-
+import { useDocumentData } from "react-firebase-hooks/firestore";
 export async function getStaticProps({
   params,
 }: {
@@ -61,6 +64,7 @@ export async function getStaticPaths() {
 }
 
 function PostPage(props: {
+  path: CollectionReference<unknown>;
   post: {
     uid: string;
     createdAt: number;
@@ -73,10 +77,26 @@ function PostPage(props: {
     slug: string;
   };
 }) {
-  console.log("props: ", props.post);
+  const postRef = doc(firestore, props.path);
+  const [realtimePost] = useDocumentData(postRef);
+  const post = realtimePost || props.post;
   return (
     <>
-      <PostFeed posts={[props.post]} admin={true} />
+      {/* <PostFeed posts={[props.post]} admin={true} /> */}
+      {/* <h1>Slug</h1> */}
+      <main className={styles.container}>
+        <section>
+          <PostContent post={post} />
+        </section>
+        <aside className="card">
+          <p>
+            <strong>
+              {post.heartCount || 0}
+              🤍
+            </strong>
+          </p>
+        </aside>
+      </main>
     </>
   );
 }
