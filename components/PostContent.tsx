@@ -1,6 +1,6 @@
 import Link from "next/link";
 import ReactMarkDown from "react-markdown";
-
+import remarkGfm from "remark-gfm";
 export default function PostContent({ post }) {
   const createdAt =
     typeof post?.createdAt === "number"
@@ -14,7 +14,7 @@ export default function PostContent({ post }) {
         <Link href={`/${post.username}/`}>@{post.username}</Link>
         on{createdAt.toISOString()}
       </span>
-      <ReactMarkDown>{post?.content}</ReactMarkDown>
+      <ReactMarkDown remarkPlugins={[remarkGfm]}>{post?.content}</ReactMarkDown>
     </div>
   );
 }
