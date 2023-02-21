@@ -1,5 +1,4 @@
 import React from "react";
-
 function AdminPostsPage() {
   return (
     <>
