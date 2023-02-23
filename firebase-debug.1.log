@@ -1,0 +1,30 @@
+[debug] [2023-02-21T10:23:32.054Z] ----------------------------------------------------------------------
+[debug] [2023-02-21T10:23:32.058Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\user\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:export ./blog-2
+[debug] [2023-02-21T10:23:32.059Z] CLI Version:   11.22.0
+[debug] [2023-02-21T10:23:32.059Z] Platform:      win32
+[debug] [2023-02-21T10:23:32.059Z] Node Version:  v18.14.0
+[debug] [2023-02-21T10:23:32.062Z] Time:          Tue Feb 21 2023 11:23:32 GMT+0100 (Central European Standard Time)
+[debug] [2023-02-21T10:23:32.063Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-02-21T10:23:32.072Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2023-02-21T10:23:32.396Z] >>> [apiv2][query] GET http://127.0.0.1:4400/ [none]
+[debug] [2023-02-21T10:23:32.476Z] <<< [apiv2][status] GET http://127.0.0.1:4400/ 200
+[debug] [2023-02-21T10:23:32.477Z] <<< [apiv2][body] GET http://127.0.0.1:4400/ {"version":"11.22.0","origins":["http://127.0.0.1:4400","http://[::1]:4400"],"host":"127.0.0.1","port":4400}
+[info] i  Found running emulator hub for project ibranista-blog at http://127.0.0.1:4400 
+[debug] [2023-02-21T10:23:43.704Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2023-02-21T10:23:43.706Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[info] i  Exporting data to: F:\firebase\ibranista-blog\blog-2 
+[debug] [2023-02-21T10:23:44.359Z] >>> [apiv2][query] GET http://127.0.0.1:4400/ [none]
+[debug] [2023-02-21T10:23:44.366Z] <<< [apiv2][status] GET http://127.0.0.1:4400/ 200
+[debug] [2023-02-21T10:23:44.367Z] <<< [apiv2][body] GET http://127.0.0.1:4400/ {"version":"11.22.0","origins":["http://127.0.0.1:4400","http://[::1]:4400"],"host":"127.0.0.1","port":4400}
+[debug] [2023-02-21T10:23:44.367Z] >>> [apiv2][query] POST http://127.0.0.1:4400/_admin/export [none]
+[debug] [2023-02-21T10:23:44.367Z] >>> [apiv2][body] POST http://127.0.0.1:4400/_admin/export {"path":"F:\\firebase\\ibranista-blog\\blog-2","initiatedBy":"emulators:export"}
+[debug] [2023-02-21T10:23:44.731Z] <<< [apiv2][status] POST http://127.0.0.1:4400/_admin/export 200
+[debug] [2023-02-21T10:23:44.731Z] <<< [apiv2][body] POST http://127.0.0.1:4400/_admin/export {"message":"OK"}
+[info] +  Export complete 
+[debug] [2023-02-21T10:23:54.798Z] Error: Timed out.
+    at Timeout._onTimeout (C:\Users\user\AppData\Roaming\npm\node_modules\firebase-tools\lib\utils.js:253:49)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+[error] 
+[error] Error: An unexpected error has occurred.
