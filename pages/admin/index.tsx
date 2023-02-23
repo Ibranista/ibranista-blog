@@ -4,7 +4,9 @@ function AdminPostsPage(props) {
   return (
     <>
       <main>
-        <AuthCheck></AuthCheck>
+        <AuthCheck>
+          <h1>Hello mate Welcome</h1>
+        </AuthCheck>
       </main>
     </>
   );
