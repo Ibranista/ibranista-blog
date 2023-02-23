@@ -1,9 +1,11 @@
+import AuthCheck from "@/components/AutchCheck";
 import React from "react";
-
-function AdminPostsPage() {
+function AdminPostsPage(props) {
   return (
     <>
-      <div>AdminPostsPage</div>
+      <main>
+        <AuthCheck></AuthCheck>
+      </main>
     </>
   );
 }

@@ -18,6 +18,7 @@ export async function getServerSideProps({ query }: { query: any }) {
   if (!userDoc) {
     return {
       notFound: true,
+      //will giveus 404 page if the page is not found
     };
   }
 
