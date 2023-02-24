@@ -40,7 +40,6 @@ function PostManager() {
     <>
       <main className={styles.container}>
         {post && (
-          
           <>
             <section>
               <h1>{post.title}</h1>
@@ -56,4 +55,8 @@ function PostManager() {
       </main>
     </>
   );
+}
+
+function PostForm({ defaultValues, postRef, preview }) {
+  const {} = useForm({ defaultValues, mode: "onChange" });
 }
