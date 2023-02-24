@@ -20,7 +20,7 @@ import {
   useCollectionData,
   useDocument,
 } from "react-firebase-hooks/firestore";
-function AdminPostsPage(props) {
+function AdminPostsPage(props: any) {
   return (
     <>
       <main>
@@ -62,7 +62,7 @@ function CreateNewPost() {
   const slug = encodeURI(kebabCase(title));
   // validate length
   const isValid = title.length > 3 && title.length < 50;
-  const createPost = async (e) => {
+  const createPost = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     const uid = auth.currentUser.uid;
     const postCollectionRef = collection(firestore, "users", uid, "posts");
