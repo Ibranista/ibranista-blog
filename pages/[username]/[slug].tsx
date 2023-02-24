@@ -26,10 +26,12 @@ export async function getStaticProps({
   const { username, slug } = params;
   const userDoc = await getUserWithUsername(username);
   // returns array of objects containing user properties
+  //  { photoURL: null, displayName: 'Ibrahim', username: 'ibranista' }
   let post: object | undefined;
   let path: string | undefined;
   if (userDoc) {
     const postRef = doc(firestore, userDoc.ref.path, "posts", slug);
+    //users/9yV1QOCzy6DJs5TqeLvEQ4GJf67q
     post = PostToJSON(await getDoc(postRef));
     // {
     //   uid: '9yV1QOCzy6DJs5TqeLvEQ4GJf67q',

@@ -6,6 +6,7 @@ import {
   query as Query,
   where,
 } from "firebase/firestore";
+import { serverTimestamp } from "firebase/firestore";
 
 export async function getUserWithUsername(username: string) {
   const usersRef = collection(firestore, "users");
