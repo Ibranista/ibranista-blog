@@ -40,6 +40,7 @@ function PostManager() {
     <>
       <main className={styles.container}>
         {post && (
+          
           <>
             <section>
               <h1>{post.title}</h1>
